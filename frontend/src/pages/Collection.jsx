@@ -11,6 +11,7 @@ const Collection = () => {
   const [filterProducts,setFilterProducts] = useState([]);
   const [category,setCategory] = useState([]);
   const  [subCategory,setSubCategory] = useState([]);
+  const [sortType,setSortType] = useState('relavent')
 
   const toggleCategory = (e) => {
     if(category.includes(e.target.value)) {
@@ -30,6 +31,7 @@ const Collection = () => {
     }
   }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const applyFilter = () => {
     let productsCopy = products.slice();
 
@@ -44,9 +46,32 @@ const Collection = () => {
     setFilterProducts(productsCopy)
   }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const sortProduct = () => {
+    let fpCopy = filterProducts.slice();
+    switch(sortType){
+      case 'low-high':
+        setFilterProducts(fpCopy.sort((a,b) => (a.price-b.price)));
+        break;
+
+      case 'high-low':
+        setFilterProducts(fpCopy.sort((a,b) => (b.price - a.price)));
+        break;
+      
+      default:
+        applyFilter();
+        break;
+    }
+  }
+
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     applyFilter();
-  },[category,subCategory])
+  },[applyFilter, category, subCategory])
+
+  useEffect(() => {
+    sortProduct();
+  },[sortProduct, sortType])
 
 
   return (
@@ -96,7 +121,7 @@ const Collection = () => {
         <div className='flex justify-between text-base sm:text-2xl mb-4'>
           <Title text1={'ALL'} text2={'COLLECTIONS'}/>
           {/* Product sort */}
-          <select className='border-2 border-gray-300 text-sm px-2'>
+          <select onChange={(e) => setSortType(e.target.value)} className='border-2 border-gray-300 text-sm px-2'>
             <option value="relavent">Sort by: Relevent</option>
             <option value="low-high">Sort by: Low-High</option>
             <option value="high-low">Sort by: High-Low</option>
