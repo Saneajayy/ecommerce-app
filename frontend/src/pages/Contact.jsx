@@ -23,6 +23,7 @@ const Contact = () => {
       </div>
 
       <NewsLetterBox/>
+      {/* completed frontend */}
     </div>
   )
 }
