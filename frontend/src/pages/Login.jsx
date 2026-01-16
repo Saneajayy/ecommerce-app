@@ -17,7 +17,7 @@ const Login = () => {
       {currentState === 'Login' ? '' : <input type="text" className='w-full px-3 py-2 border border-gray-800' placeholder='Name' required />}
       <input type="email" className='w-full px-3 py-2 border border-gray-800' placeholder='Email' required />
       <input type="password" className='w-full px-3 py-2 border border-gray-800' placeholder='Password' required />
-      <div className='w-full flex justify-between text-sm mt-[-8px]'>
+      <div className='w-full flex justify-between text-sm -mt-2'>
         <p className='cursor-pointer'>Forgot your password</p>
         {
           currentState === 'Login'
