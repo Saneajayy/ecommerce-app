@@ -7,6 +7,10 @@ import { ShopContext } from '../context/ShopContext'
 const PlaceOrder = () => {
 
   const [method,setMethod] = useState('cod');
+  const [formData,setFormData] = useState({
+    firstName:'',
+    lastname:''
+  })
 
   const {navigate} = useContext(ShopContext);
 
