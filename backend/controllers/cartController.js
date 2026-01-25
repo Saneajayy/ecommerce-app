@@ -1,5 +1,5 @@
 import { response } from "express";
-import userModel from "../models/userModel"
+import userModel from "../models/userModel.js"
 
 
 // add products to user cart
@@ -71,4 +71,4 @@ const getUserCart = async (req,res) => {
     }
 }
 
-export { addToCart , getUserCart , updateCart }
+export { addToCart , updateCart , getUserCart}
