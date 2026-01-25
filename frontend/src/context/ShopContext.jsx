@@ -1,9 +1,12 @@
 import { createContext ,useEffect,useState} from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const ShopContext = createContext();
+
+
 
 const ShopContextProvider = (props) => {
 
@@ -14,11 +17,12 @@ const ShopContextProvider = (props) => {
   const [showSearch,setShowSearch] = useState(false);
   const [cartItems,setCartItems] = useState({});
   const  navigate = useNavigate();
+  const [products,setProducts] = useState([]);
 
   const addToCart = async (itemId,size) => {
 
     if(!size) {
-      toast.error('Select Product Size');
+      toast.error('Select Product Size'); 
       return;
     }
 
@@ -49,7 +53,7 @@ const ShopContextProvider = (props) => {
             totalCount += cartItems[items][item];
           }
         } catch (error) {
-
+          console.log(error.message)
         }
       }
     }
@@ -74,14 +78,37 @@ const ShopContextProvider = (props) => {
             totalAmount += itemInfo.price * cartItems[items][item];
           }
         } catch (error) {
-          
+          console.log(error.message)
         }
       }
     }
     return totalAmount;
   }
 
-  
+  console.log("Backend URL:", backendUrl);
+
+
+  const getProductsData = async () => {
+  try {
+    const response = await axios.get(backendUrl + '/api/product/list');
+    if (response.data.success) {
+      setProducts(response.data.products); 
+    } else {
+      toast.error(response.data.message);
+    }
+
+  } catch (error) {
+    console.log(error);
+    toast.error(error.message);
+  }
+ }
+
+  useEffect(()=>{
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    getProductsData();
+  },[])
+
+
 
   const value = {
     products,

@@ -17,7 +17,7 @@ const BestSeller = () => {
     },[products])
 
     console.log('Products from context:', products);
-console.log('BestSeller state:', bestseller);
+    console.log('BestSeller state:', bestseller);
 
 
   return (
