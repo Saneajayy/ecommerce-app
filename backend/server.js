@@ -15,10 +15,18 @@ const port = process.env.PORT || 4000
 connectDB()
 connectCloudinary()
 
+app.set('trust proxy', 1);
+
 // middlewares
 
 app.use(express.json())
-app.use(cors())
+app.use(cors(
+    {
+        origin : ['https://ecommerce-frontend-one-orcin.vercel.app'],
+        credentials: true,
+
+    }
+))
 app.use('/api/cart',cartRouter)
 
 // api endpoints
