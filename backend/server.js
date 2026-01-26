@@ -22,7 +22,7 @@ app.set('trust proxy', 1);
 app.use(express.json())
 app.use(cors(
     {
-        origin : ['https://ecommerce-frontend-one-orcin.vercel.app'],
+        origin : ['https://ecommerce-frontend-one-orcin.vercel.app','http://localhost:5173','http://localhost:4000'],
         credentials: true,
 
     }
