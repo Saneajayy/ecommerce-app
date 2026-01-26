@@ -1,4 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&display=swap');
 @import "tailwindcss";
+
+
+@media (max-width:640px){
+    a.active{
+        background-color: black;
+        color: white;
+    }
+}
 
 
 a.active hr{
@@ -18,11 +27,4 @@ a.active hr{
 
 ::-webkit-scrollbar {
   display: none;
-}
-
-@media (max-width:640px){
-    a.active{
-        background-color: black;
-        color: white;
-    }
 }

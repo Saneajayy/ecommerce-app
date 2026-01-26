@@ -41,7 +41,7 @@ const PlaceOrder = () => {
       description:'Order Payment',
       order_id: order.id,
       receipt: order.receipt,
-      handler: async (resonse) => {
+      handler: async (response) => {
         console.log(response)
         try {
 
@@ -106,7 +106,7 @@ const PlaceOrder = () => {
 
           case 'stripe' :
             const responseStripe = await axios.post(backendUrl + '/api/order/stripe' ,orderData,{headers:{token}})
-            if (response.data.success) {
+            if (responseStripe.data.success) {
               const {session_url} = responseStripe.data
               window.location.replace(session_url)
             } else {
@@ -129,7 +129,8 @@ const PlaceOrder = () => {
       
     } catch (error) {
       console.log(error)
-      toast.error(error.message)
+      toast.error(error.message || 'Payment verification failed')
+
       
     }
   }

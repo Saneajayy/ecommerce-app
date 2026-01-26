@@ -2,12 +2,12 @@ import orderModel from "../models/orderModel.js";
 import productModel from "../models/productModel.js";
 import userModel from "../models/userModel.js";
 import Stripe from "stripe";
-import razopay from 'razorpay'
+import razorpay from 'razorpay'
 
 // GATEWAY INITIALIZE 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
-const razorpayInstance = new newrazorpay({
-    key.id : process.env.RAZORPAY_KEY_ID,
+const razorpayInstance = new razorpay({
+    key_id : process.env.RAZORPAY_KEY_ID,
     key_secret : process.env.RAZORPAY_KEY_SECRET,
 })
 
