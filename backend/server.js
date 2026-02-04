@@ -25,7 +25,7 @@ app.use(cors(
         origin : ['https://ecommerce-frontend-one-orcin.vercel.app','http://localhost:5173','http://localhost:4000','https://ecommerce-backend-one-lake.vercel.app','https://ecommerce-frontend-git-main-ajay-kumars-projects-2102f263.vercel.app'],
         credentials: true,
         methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-        allowedHeaders: ["Content-Type", "Authorization"]
+        allowedHeaders: ["Content-Type", "Authorization","token"]
     }
 ))
 
