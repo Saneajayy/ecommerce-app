@@ -23,7 +23,9 @@ app.use(
     origin: [
       "http://localhost:5173",
       "https://ecommerce-frontend-one-orcin.vercel.app",
-      "https://ecommerce-frontend-git-main-ajay-kumars-projects-2102f263.vercel.app"
+      "https://ecommerce-frontend-git-main-ajay-kumars-projects-2102f263.vercel.app",
+      "https://ecommerce-backend-one-lake.vercel.app"
+
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
