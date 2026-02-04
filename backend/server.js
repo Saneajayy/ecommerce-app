@@ -1,41 +1,48 @@
-import express from 'express';
-import cors from 'cors';
-import 'dotenv/config';
-import connectDB from './config/mongodb.js';
-import connectCloudinary from './config/cloudinary.js';
-import userRouter from './routes/userRoutes.js';
-import productRouter from './routes/productRoute.js';
-import cartRouter from './routes/cartRoute.js';
-import orderRouter from './routes/orderRoute.js';
+import express from "express";
+import cors from "cors";
+import "dotenv/config";
+import connectDB from "./config/mongodb.js";
+import connectCloudinary from "./config/cloudinary.js";
+import userRouter from "./routes/userRoutes.js";
+import productRouter from "./routes/productRoute.js";
+import cartRouter from "./routes/cartRoute.js";
+import orderRouter from "./routes/orderRoute.js";
 
-// App config
+const app = express();
+const port = process.env.PORT || 4000;
 
-const app = express()
-const port = process.env.PORT || 4000
-connectDB()
-connectCloudinary()
+app.set("trust proxy", 1);
 
-app.set('trust proxy', 1);
+connectDB();
+connectCloudinary();
 
-// middlewares
+app.use(express.json());
 
-app.use(express.json())
-app.use(cors(
-    {
-        origin : ['https://ecommerce-frontend-one-orcin.vercel.app','http://localhost:5173','http://localhost:4000','https://ecommerce-backend-one-lake.vercel.app'],
-        credentials: true,
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://ecommerce-frontend-one-orcin.vercel.app",
+      "https://ecommerce-frontend-git-main-ajay-kumars-projects-2102f263.vercel.app"
+    ],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+  })
+);
 
-    }
-))
-app.use('/api/cart',cartRouter)
+// ✅ REQUIRED for Vercel / browsers
+app.options("*", cors());
 
-// api endpoints
-app.use('/api/user',userRouter)
-app.use('/api/product',productRouter)
-app.use('/api/order',orderRouter)
+app.use("/api/user", userRouter);
+app.use("/api/product", productRouter);
+app.use("/api/cart", cartRouter);
+app.use("/api/order", orderRouter);
 
-app.get('/',(req,res)=>{
-    res.send('API WORKING')
-})
+app.get("/", (req, res) => {
+  res.send("API WORKING");
+});
 
-app.listen(port, ()=> console.log('Server started on PORT : '+port))
+app.listen(port, () =>
+  console.log("Server started on PORT:", port)
+);
